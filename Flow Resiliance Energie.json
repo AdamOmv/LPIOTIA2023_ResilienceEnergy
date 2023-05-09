@@ -1,0 +1,374 @@
+[
+    {
+        "id": "6ca67c53fc3bd227",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "dd12acfb482d62b8",
+        "type": "mqtt in",
+        "z": "6ca67c53fc3bd227",
+        "name": "",
+        "topic": "/home/+/events/rpc",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c8e0e56e7aaa990",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 260,
+        "wires": [
+            [
+                "7828589c55db7136",
+                "fa8fee78ee72361c"
+            ]
+        ]
+    },
+    {
+        "id": "7828589c55db7136",
+        "type": "debug",
+        "z": "6ca67c53fc3bd227",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "46d2aaeceea49289",
+        "type": "function",
+        "z": "6ca67c53fc3bd227",
+        "name": "current",
+        "func": "let data = msg.payload;\ndata = JSON.parse(data);\nlet params = data.params;\n\nif(params[\"switch:0\"][\"current\"] != undefined){\n    msg = {payload: params[\"switch:0\"][\"current\"]};\n    return msg;\n}\n\n//msg = { payload: params};\n//return msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 180,
+        "wires": [
+            [
+                "184e23e41e337d6a"
+            ]
+        ]
+    },
+    {
+        "id": "6f6a28a862d01bca",
+        "type": "debug",
+        "z": "6ca67c53fc3bd227",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "fa8fee78ee72361c",
+        "type": "json",
+        "z": "6ca67c53fc3bd227",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 510,
+        "y": 260,
+        "wires": [
+            [
+                "46d2aaeceea49289",
+                "394277ddbd3e78f9",
+                "4be588764a1371a9"
+            ]
+        ]
+    },
+    {
+        "id": "394277ddbd3e78f9",
+        "type": "function",
+        "z": "6ca67c53fc3bd227",
+        "name": "apower",
+        "func": "let data = msg.payload;\ndata = JSON.parse(data);\nlet params = data.params;\n\nif(params[\"switch:0\"][\"apower\"] != undefined){\n    msg = { payload: params[\"switch:0\"][\"apower\"]};\n    return msg;\n}\n\n//msg = { payload: params};\n//return msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 260,
+        "wires": [
+            [
+                "dc9bf6eda19069f5"
+            ]
+        ]
+    },
+    {
+        "id": "4be588764a1371a9",
+        "type": "function",
+        "z": "6ca67c53fc3bd227",
+        "name": "voltage",
+        "func": "let data = msg.payload;\ndata = JSON.parse(data);\nlet params = data.params;\n\nif(params[\"switch:0\"][\"voltage\"] != undefined){\n    msg = { payload: params[\"switch:0\"][\"voltage\"]};\n    return msg;\n}\n\n//msg = { payload: params};\n//return msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 340,
+        "wires": [
+            [
+                "86315d939cbccdf3"
+            ]
+        ]
+    },
+    {
+        "id": "50f0a6022072974d",
+        "type": "debug",
+        "z": "6ca67c53fc3bd227",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "984ed0b817bd8797",
+        "type": "debug",
+        "z": "6ca67c53fc3bd227",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "19b9123b54c30df5",
+        "type": "influxdb out",
+        "z": "6ca67c53fc3bd227",
+        "influxdb": "55dbe8c0b44230b5",
+        "name": "",
+        "measurement": "current",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "iut",
+        "bucket": "iut",
+        "x": 1280,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "184e23e41e337d6a",
+        "type": "change",
+        "z": "6ca67c53fc3bd227",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "fields.current",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "global",
+                "to": "$append(fields,tags)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 920,
+        "y": 180,
+        "wires": [
+            [
+                "6f6a28a862d01bca",
+                "19b9123b54c30df5"
+            ]
+        ]
+    },
+    {
+        "id": "dc9bf6eda19069f5",
+        "type": "change",
+        "z": "6ca67c53fc3bd227",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "fields.apower",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "global",
+                "to": "$append(fields,tags)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 920,
+        "y": 260,
+        "wires": [
+            [
+                "50f0a6022072974d",
+                "1a19b68f852bbe7e"
+            ]
+        ]
+    },
+    {
+        "id": "86315d939cbccdf3",
+        "type": "change",
+        "z": "6ca67c53fc3bd227",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "fields.voltage",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "global",
+                "to": "$append(fields,tags)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 920,
+        "y": 340,
+        "wires": [
+            [
+                "984ed0b817bd8797",
+                "8683d451f1c6f34d"
+            ]
+        ]
+    },
+    {
+        "id": "1a19b68f852bbe7e",
+        "type": "influxdb out",
+        "z": "6ca67c53fc3bd227",
+        "influxdb": "55dbe8c0b44230b5",
+        "name": "",
+        "measurement": "apower",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "iut",
+        "bucket": "iut",
+        "x": 1280,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "8683d451f1c6f34d",
+        "type": "influxdb out",
+        "z": "6ca67c53fc3bd227",
+        "influxdb": "55dbe8c0b44230b5",
+        "name": "",
+        "measurement": "voltage",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "iut",
+        "bucket": "iut",
+        "x": 1280,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "9c8e0e56e7aaa990",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "55dbe8c0b44230b5",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "rejectUnauthorized": true
+    }
+]
