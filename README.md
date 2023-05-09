@@ -4,7 +4,6 @@
 * Billebault Baptiste 22005584 billebaultbaptiste@gmail.com
 
 ---------------------
-
 ## Git Procedure
 
 When you work in one non development file do git lock  
@@ -37,7 +36,5 @@ git lfs unlock "file name"
 
 ### 2.Frontend
 
-
 ---------------------
-
 ## Sensor
