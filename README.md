@@ -238,7 +238,24 @@ Pour la configuration il faut creer un Token et l'ajouter sur Node-RED et Grafan
 
 ## Grafana
 
-Grafana est un outil open source de monitoring informatique orienté data visualistation 
+Grafana est un outil open source de monitoring informatique orienté data visualistation.  
+On l'utilise ici pour créer un DashBoard.
+
+1. Il faut connecter InfluxDb a Grafana avec un Token
+2. Creer un DashBoard avec un code en querry
+
+Le code query et dans le fichier "InfluxDb query command.txt"
+
+Exemple :
+
+```
+from(bucket: "consomation")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "current")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+```
 
 ---------------------
 
