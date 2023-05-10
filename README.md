@@ -18,6 +18,36 @@ git lfs unlock "file name"
 ```
 
 ---------------------
+
+## Architecture
+
+### 1.Backend
+
+* Mosquitto (MQTT)
+* Node-Red
+* InfluxDB
+* Python
+* Nginx
+* Raspbian
+
+### 2.Frontend
+
+* Grafana
+
+---------------------
+## Materiels
+
+* ShellyPlus 1PM * 2
+* Panneau solaire
+* Batterie
+* Onduleur
+* RaspBerry Pi3 model B
+* Relais
+* APS (Automatique Power Switch)
+* Gestionnaire de Charge
+* ET LE SOLEIL (ADAM)
+
+---------------------
 ## Draw.io Procedure
  
 1. pull the file (git pull)  
@@ -257,22 +287,3 @@ from(bucket: "consomation")
   |> yield(name: "mean")
 ```
 
----------------------
-
-## Architecture
-
-### 1.Backend
-
-* Mosquitto (MQTT)
-* Node-Red
-* InfluxDB
-* Python
-* Nginx
-* Raspbian
-
-### 2.Frontend
-
-* Grafana
-
----------------------
-## Sensor
