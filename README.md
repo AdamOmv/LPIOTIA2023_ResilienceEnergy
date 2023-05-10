@@ -18,6 +18,19 @@ git lfs unlock "file name"
 ```
 
 ---------------------
+## Materiels
+
+* ShellyPlus 1PM * 2
+* Panneau solaire
+* Batterie
+* Onduleur
+* RaspBerry Pi3 model B
+* Relais
+* APS (Automatique Power Switch)
+* Gestionnaire de Charge
+* ET LE SOLEIL (ADAM)
+
+---------------------
 
 ## Architecture
 
@@ -33,19 +46,6 @@ git lfs unlock "file name"
 ### 2.Frontend
 
 * Grafana
-
----------------------
-## Materiels
-
-* ShellyPlus 1PM * 2
-* Panneau solaire
-* Batterie
-* Onduleur
-* RaspBerry Pi3 model B
-* Relais
-* APS (Automatique Power Switch)
-* Gestionnaire de Charge
-* ET LE SOLEIL (ADAM)
 
 ---------------------
 ## Draw.io Procedure
