@@ -1,0 +1,47 @@
+Projet MTE :
+
+	-Consommation :
+		Courant:
+			from(bucket: "consomation")
+  				|> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  				|> filter(fn: (r) => r["_measurement"] == "current")
+  				|> filter(fn: (r) => r["_field"] == "value")
+  				|> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  				|> yield(name: "mean")
+		Puissance:
+			from(bucket: "consomation")
+  				|> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  				|> filter(fn: (r) => r["_measurement"] == "apower")
+  				|> filter(fn: (r) => r["_field"] == "value")
+  				|> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  				|> yield(name: "mean")
+		Tension:
+			from(bucket: "consomation")
+  				|> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  				|> filter(fn: (r) => r["_measurement"] == "volatege")
+  				|> filter(fn: (r) => r["_field"] == "value")
+  				|> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  				|> yield(name: "mean")
+		
+	-Production :
+		Courant:
+			from(bucket: "production")
+  				|> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  				|> filter(fn: (r) => r["_measurement"] == "current")
+  				|> filter(fn: (r) => r["_field"] == "value")
+  				|> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  				|> yield(name: "mean")
+		Puissance:
+			from(bucket: "production")
+  				|> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  				|> filter(fn: (r) => r["_measurement"] == "apower")
+  				|> filter(fn: (r) => r["_field"] == "value")
+  				|> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  				|> yield(name: "mean")
+		Tension:
+			from(bucket: "production")
+  				|> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  				|> filter(fn: (r) => r["_measurement"] == "volatege")
+  				|> filter(fn: (r) => r["_field"] == "value")
+  				|> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  				|> yield(name: "mean")
